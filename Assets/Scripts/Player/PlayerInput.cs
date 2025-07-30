@@ -7,6 +7,8 @@ namespace Player
     public class PlayerInput : MonoBehaviour
     {
         public event UnityAction JumpClicked;
+        public event UnityAction MovementClicked;
+        public event UnityAction MovementCanceled;
         
         public Vector2 Movement => _inputAction.Player.Movement.ReadValue<Vector2>();
         
@@ -17,6 +19,8 @@ namespace Player
             _inputAction = new PlayerInputAction();
 
             _inputAction.Player.Jump.performed += Jump;
+            _inputAction.Player.Movement.performed += Move;
+            _inputAction.Player.Movement.canceled += Stand;
         }
 
         private void OnEnable()
@@ -32,6 +36,16 @@ namespace Player
         private void Jump(InputAction.CallbackContext context)
         {
             JumpClicked?.Invoke();
+        }
+        
+        private void Move(InputAction.CallbackContext context)
+        {
+            MovementClicked?.Invoke();
+        }
+
+        private void Stand(InputAction.CallbackContext context)
+        {
+            MovementCanceled?.Invoke();
         }
     }
 }

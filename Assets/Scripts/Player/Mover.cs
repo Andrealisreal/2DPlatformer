@@ -4,44 +4,30 @@ namespace Player
 {
     public class Mover : MonoBehaviour
     {
-        private Rigidbody2D _rigidbody2D;
-        private PlayerInput _input;
-
-        private Vector2 _direction;
+        [SerializeField] private float _speed = 3f;
         
-        private float _speed = 3f;
-        private bool _isLookRight = true;
+        private Rigidbody2D _rigidbody2D;
+        
+        private readonly Quaternion _lookRight = Quaternion.Euler(0, 0, 0);
+        private readonly Quaternion _lookLeft = Quaternion.Euler(0, 180, 0);
 
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
-            _input = GetComponent<PlayerInput>();
         }
 
-        private void FixedUpdate()
+        public void Move(Vector2 direction)
         {
-            Move();
+            _rigidbody2D.linearVelocity = new Vector2(direction.x * _speed, _rigidbody2D.linearVelocity.y);
+            Turn(direction);
         }
 
-        private void Move()
+        private void Turn(Vector2 direction)
         {
-            _direction = _input.Movement;
-            _rigidbody2D.linearVelocity = new Vector2(_direction.x * _speed, _rigidbody2D.linearVelocity.y);
-            Turn();
-        }
-
-        private void Turn()
-        {
-            if (_direction.x > 0 && _isLookRight == false || _direction.x < 0 && _isLookRight)
-                Flip();
-        }
-
-        private void Flip()
-        {
-            _isLookRight = _isLookRight == false;
-            var scale = transform.localScale;
-            scale.x *= -1;
-            transform.localScale = scale;
+            if (direction.x > 0)
+                transform.rotation = _lookRight;
+            else if (direction.x < 0)
+                transform.rotation = _lookLeft;
         }
     }
 }

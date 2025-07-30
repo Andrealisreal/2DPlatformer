@@ -10,34 +10,43 @@ namespace Player
     [RequireComponent(typeof(Mover))]
     public class Player : MonoBehaviour
     {
+        private PlayerAnimator _playerAnimator;
         private Animator _animator;
         private PlayerInput _input;
+        private Jumper _jumper;
+        private Mover _mover;
+        
+        private Vector2 _direction;
 
         private void Awake()
         {
             _animator = GetComponent<Animator>();
             _input = GetComponent<PlayerInput>();
-        }
-
-        private void Update()
-        {
-            AnimRun();
-        }
-
-        private void AnimRun()
-        {
-            var move = _input.Movement;
+            _mover = GetComponent<Mover>();
+            _jumper = GetComponent<Jumper>();
             
-            if (move.x > 0 || move.x < 0)
-            {
-                _animator.SetBool("Run", true);
-                Debug.Log("Run");
-            }
-            else
-            {
-                _animator.SetBool("Run", false);
-                Debug.Log("Don't run");
-            }
+            _playerAnimator = new PlayerAnimator(_animator);
+        }
+
+        private void FixedUpdate()
+        {
+            _mover.Move(_input.Movement);
+        }
+
+        private void OnEnable()
+        {
+            _input.JumpClicked += _playerAnimator.PlayJump;
+            _input.JumpClicked += _jumper.Jump;
+            _input.MovementClicked += _playerAnimator.PlayRun;
+            _input.MovementCanceled += _playerAnimator.StopRun;
+        }
+
+        private void OnDisable()
+        {
+            _input.JumpClicked -= _playerAnimator.PlayJump;
+            _input.JumpClicked -= _jumper.Jump;
+            _input.MovementClicked -= _playerAnimator.PlayRun;
+            _input.MovementCanceled -= _playerAnimator.StopRun;
         }
     }
 }
