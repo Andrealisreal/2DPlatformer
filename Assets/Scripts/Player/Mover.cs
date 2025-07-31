@@ -7,13 +7,12 @@ namespace Player
         [SerializeField] private float _speed = 3f;
         
         private Rigidbody2D _rigidbody2D;
-        
-        private readonly Quaternion _lookRight = Quaternion.Euler(0, 0, 0);
-        private readonly Quaternion _lookLeft = Quaternion.Euler(0, 180, 0);
+        private SpriteRenderer _renderer;
 
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
+            _renderer = GetComponent<SpriteRenderer>();
         }
 
         public void Move(Vector2 direction)
@@ -25,9 +24,9 @@ namespace Player
         private void Turn(Vector2 direction)
         {
             if (direction.x > 0)
-                transform.rotation = _lookRight;
+                _renderer.flipX = false;
             else if (direction.x < 0)
-                transform.rotation = _lookLeft;
+                _renderer.flipX = true;
         }
     }
 }

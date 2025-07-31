@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 namespace Player
 {
+    [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(Jumper))]
     [RequireComponent(typeof(Animator))]

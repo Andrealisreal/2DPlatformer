@@ -8,9 +8,7 @@ namespace Enemy
         [SerializeField] private float _speed = 2f;
         [SerializeField] private float _reachDistance = 0.1f;
         
-        private readonly Quaternion _lookRight = Quaternion.Euler(0, 0, 0);
-        private readonly Quaternion _lookLeft = Quaternion.Euler(0, 180, 0);
-        
+        private SpriteRenderer _renderer;
         private Rigidbody2D _rigidbody2D;
 
         private int _currentWaypointIndex;
@@ -18,6 +16,7 @@ namespace Enemy
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
+            _renderer = GetComponent<SpriteRenderer>();
         }
 
         public void Move()
@@ -39,9 +38,9 @@ namespace Enemy
         private void Turn(Vector2 direction)
         {
             if (direction.x > 0)
-                transform.rotation = _lookRight;
+                _renderer.flipX = false;
             else if (direction.x < 0)
-                transform.rotation = _lookLeft;
+                _renderer.flipX = true;
         }
     }
 }
