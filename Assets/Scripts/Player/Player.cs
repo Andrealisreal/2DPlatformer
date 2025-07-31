@@ -9,7 +9,7 @@ namespace Player
     [RequireComponent(typeof(Jumper))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(CapsuleCollider2D))]
     [RequireComponent(typeof(Mover))]
     public class Player : MonoBehaviour
     {
