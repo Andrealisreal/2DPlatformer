@@ -6,16 +6,16 @@ namespace Enemy
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
-    [RequireComponent(typeof(Patroler))]
+    [RequireComponent(typeof(Patroller))]
     public class Enemy : MonoBehaviour
     {
-        private Patroler _patroler;
+        private Patroller _patroler;
         private Animator _animator;
         private EnemyAnimator _enemyAnimator;
 
         private void Awake()
         {
-            _patroler = GetComponent<Patroler>();
+            _patroler = GetComponent<Patroller>();
             _animator = GetComponent<Animator>();
 
             _enemyAnimator = new EnemyAnimator(_animator);

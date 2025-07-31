@@ -9,7 +9,6 @@ namespace Player
         public void AddCoin()
         {
             _countMoney++;
-            Debug.Log(_countMoney);
         }
     }
 }

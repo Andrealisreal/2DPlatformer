@@ -28,6 +28,7 @@ namespace Items
 
             var money = Instantiate(_prefab);
             money.transform.position = _spawnPoints[Random.Range(0, _spawnPoints.Length)].position;
+            money.Collected += Spawn;
         }
     }
 }

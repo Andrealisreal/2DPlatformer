@@ -19,12 +19,13 @@ namespace Player
 
         public void Jump()
         {
-            Collider2D hit = Physics2D.OverlapBox(transform.position + _height, _size, 0f, LayerMask.GetMask("Ground", "Enemy"));
+            Collider2D hit = Physics2D.OverlapBox(transform.position + _height, _size, 0f,
+                LayerMask.GetMask("Ground", "Enemy"));
 
             if (hit != null)
                 _rigidbody2D.AddForce(Vector2.up * _force, ForceMode2D.Impulse);
         }
-        
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;

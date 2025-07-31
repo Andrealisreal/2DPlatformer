@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class Patroler : MonoBehaviour
+    public class Patroller : MonoBehaviour
     {
         [SerializeField] private Transform[] _waypoints;
         [SerializeField] private float _speed = 2f;

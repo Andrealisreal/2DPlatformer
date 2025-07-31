@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Items
 {
@@ -6,10 +7,23 @@ namespace Items
     [RequireComponent(typeof(CircleCollider2D))]
     public class Money : MonoBehaviour
     {
-        private void OnCollisionEnter2D(Collision2D other)
+        public event UnityAction Collected;
+
+        private CircleCollider2D _collider;
+
+        private void Awake()
+        {
+            _collider = GetComponent<CircleCollider2D>();
+            _collider.isTrigger = true;
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent<Player.Player>(out _))
+            {
+                Collected?.Invoke();
                 Destroy(gameObject);
+            }
         }
     }
 }
