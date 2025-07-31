@@ -7,7 +7,7 @@ namespace Enemy
         [SerializeField] private Transform[] _waypoints;
         [SerializeField] private float _speed = 2f;
         [SerializeField] private float _reachDistance = 0.1f;
-        
+
         private SpriteRenderer _renderer;
         private Rigidbody2D _rigidbody2D;
 
@@ -26,12 +26,12 @@ namespace Enemy
 
             Vector2 targetPosition = _waypoints[_currentWaypointIndex].position;
             Vector2 direction = (targetPosition - _rigidbody2D.position).normalized;
-            
+
             _rigidbody2D.linearVelocity = direction * _speed;
-            
+
             if (Vector2.Distance(_rigidbody2D.position, targetPosition) <= _reachDistance)
                 _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
-            
+
             Turn(direction);
         }
 

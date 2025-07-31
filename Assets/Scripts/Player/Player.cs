@@ -1,8 +1,9 @@
+using Items;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Player
 {
+    [RequireComponent(typeof(Inventory))]
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(Jumper))]
@@ -12,27 +13,35 @@ namespace Player
     [RequireComponent(typeof(Mover))]
     public class Player : MonoBehaviour
     {
+        private Inventory _inventory;
         private PlayerAnimator _playerAnimator;
         private Animator _animator;
         private PlayerInput _input;
         private Jumper _jumper;
         private Mover _mover;
-        
+
         private Vector2 _direction;
 
         private void Awake()
         {
+            _inventory = GetComponent<Inventory>();
             _animator = GetComponent<Animator>();
             _input = GetComponent<PlayerInput>();
             _mover = GetComponent<Mover>();
             _jumper = GetComponent<Jumper>();
-            
+
             _playerAnimator = new PlayerAnimator(_animator);
         }
 
         private void FixedUpdate()
         {
             _mover.Move(_input.Movement);
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.TryGetComponent<Money>(out _))
+                _inventory.AddCoin();
         }
 
         private void OnEnable()

@@ -17,7 +17,7 @@ namespace Enemy
         {
             _patroler = GetComponent<Patroler>();
             _animator = GetComponent<Animator>();
-            
+
             _enemyAnimator = new EnemyAnimator(_animator);
         }
 
@@ -25,7 +25,7 @@ namespace Enemy
         {
             _enemyAnimator.PlayRun();
         }
-        
+
         private void FixedUpdate()
         {
             _patroler.Move();

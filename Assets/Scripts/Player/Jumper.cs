@@ -5,8 +5,8 @@ namespace Player
     public class Jumper : MonoBehaviour
     {
         [SerializeField] private float _force = 5f;
-        [SerializeField] private float _width = 1f;
-        [SerializeField] private float _height = 2f;
+        [SerializeField] private Vector2 _size;
+        [SerializeField] private Vector3 _height;
 
         private Rigidbody2D _rigidbody2D;
 
@@ -19,15 +19,16 @@ namespace Player
 
         public void Jump()
         {
-            Collider2D hit = Physics2D.OverlapCapsule(
-                transform.position,
-                new Vector2(_width, _height),
-                CapsuleDirection2D.Vertical,
-                0f,
-                LayerMask.GetMask(nameof(Ground), nameof(Enemy)));
+            Collider2D hit = Physics2D.OverlapBox(transform.position + _height, _size, 0f, LayerMask.GetMask("Ground", "Enemy"));
 
             if (hit != null)
                 _rigidbody2D.AddForce(Vector2.up * _force, ForceMode2D.Impulse);
+        }
+        
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(transform.position + _height, _size);
         }
     }
 }

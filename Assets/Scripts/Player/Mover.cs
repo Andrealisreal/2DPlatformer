@@ -5,7 +5,7 @@ namespace Player
     public class Mover : MonoBehaviour
     {
         [SerializeField] private float _speed = 3f;
-        
+
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _renderer;
 

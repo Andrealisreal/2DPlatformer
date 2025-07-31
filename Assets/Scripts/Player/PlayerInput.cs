@@ -9,9 +9,9 @@ namespace Player
         public event UnityAction JumpClicked;
         public event UnityAction MovementClicked;
         public event UnityAction MovementCanceled;
-        
+
         public Vector2 Movement => _inputAction.Player.Movement.ReadValue<Vector2>();
-        
+
         private PlayerInputAction _inputAction;
 
         private void Awake()
@@ -37,7 +37,7 @@ namespace Player
         {
             JumpClicked?.Invoke();
         }
-        
+
         private void Move(InputAction.CallbackContext context)
         {
             MovementClicked?.Invoke();

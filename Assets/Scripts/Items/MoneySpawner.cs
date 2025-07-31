@@ -23,13 +23,11 @@ namespace Items
         private IEnumerator IntervalSpawning()
         {
             var wait = new WaitForSeconds(_delaySpawn);
-        
+
             yield return wait;
-            
+
             var money = Instantiate(_prefab);
             money.transform.position = _spawnPoints[Random.Range(0, _spawnPoints.Length)].position;
-
-            money.CoinPicked += Spawn;
         }
     }
 }

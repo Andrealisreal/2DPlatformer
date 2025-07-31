@@ -1,16 +1,15 @@
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+namespace Player
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class Inventory : MonoBehaviour
     {
-        
-    }
+        private int _countMoney;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void AddCoin()
+        {
+            _countMoney++;
+            Debug.Log(_countMoney);
+        }
     }
 }
