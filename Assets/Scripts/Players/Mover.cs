@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Player
+namespace Players
 {
     public class Mover : MonoBehaviour
     {
@@ -8,25 +8,19 @@ namespace Player
 
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _renderer;
+        private Flipper _flipper;
 
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _renderer = GetComponent<SpriteRenderer>();
+            _flipper = new(_renderer);
         }
 
         public void Move(Vector2 direction)
         {
             _rigidbody2D.linearVelocity = new Vector2(direction.x * _speed, _rigidbody2D.linearVelocity.y);
-            Turn(direction);
-        }
-
-        private void Turn(Vector2 direction)
-        {
-            if (direction.x > 0)
-                _renderer.flipX = false;
-            else if (direction.x < 0)
-                _renderer.flipX = true;
+            _flipper.Turn(direction);
         }
     }
 }

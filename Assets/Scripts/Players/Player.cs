@@ -1,7 +1,7 @@
 using Items;
 using UnityEngine;
 
-namespace Player
+namespace Players
 {
     [RequireComponent(typeof(Inventory))]
     [RequireComponent(typeof(SpriteRenderer))]
@@ -38,10 +38,13 @@ namespace Player
             _mover.Move(_input.Movement);
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnCollisionStay2D(Collision2D other)
         {
             if (other.gameObject.TryGetComponent<Money>(out _))
+            {
                 _inventory.AddCoin();
+                Destroy(other.gameObject);
+            }
         }
 
         private void OnEnable()

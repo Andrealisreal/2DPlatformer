@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Enemy
+namespace Enemies
 {
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(Animator))]
@@ -9,13 +9,13 @@ namespace Enemy
     [RequireComponent(typeof(Patroller))]
     public class Enemy : MonoBehaviour
     {
-        private Patroller _patroler;
+        private Patroller _patroller;
         private Animator _animator;
         private EnemyAnimator _enemyAnimator;
 
         private void Awake()
         {
-            _patroler = GetComponent<Patroller>();
+            _patroller = GetComponent<Patroller>();
             _animator = GetComponent<Animator>();
 
             _enemyAnimator = new EnemyAnimator(_animator);
@@ -28,7 +28,7 @@ namespace Enemy
 
         private void FixedUpdate()
         {
-            _patroler.Move();
+            _patroller.Move();
         }
     }
 }
