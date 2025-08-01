@@ -7,8 +7,7 @@ namespace Enemies
         [SerializeField] private Transform[] _waypoints;
         [SerializeField] private float _speed = 2f;
         [SerializeField] private float _reachDistance = 0.1f;
-
-        private SpriteRenderer _renderer;
+        
         private Rigidbody2D _rigidbody2D;
         private Flipper _flipper;
 
@@ -17,8 +16,7 @@ namespace Enemies
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
-            _renderer = GetComponent<SpriteRenderer>();
-            _flipper = new(_renderer);
+            _flipper = new();
         }
 
         public void Move()
@@ -34,7 +32,7 @@ namespace Enemies
             if (Vector2.Distance(_rigidbody2D.position, targetPosition) <= _reachDistance)
                 _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
 
-            _flipper.Turn(direction);
+            _flipper.Turn(transform, direction);
         }
     }
 }

@@ -2,18 +2,14 @@ using UnityEngine;
 
 public class Flipper
 {
-    private readonly SpriteRenderer _renderer;
+    private readonly Quaternion _lookRight = Quaternion.Euler(0, 0, 0);
+    private readonly Quaternion _lookLeft = Quaternion.Euler(0, 180, 0);
 
-    public Flipper(SpriteRenderer renderer)
-    {
-        _renderer = renderer;
-    }
-
-    public void Turn(Vector2 direction)
+    public void Turn(Transform transform, Vector2 direction)
     {
         if (direction.x > 0)
-            _renderer.flipX = false;
+            transform.rotation = _lookRight;
         else if (direction.x < 0)
-            _renderer.flipX = true;
+            transform.rotation = _lookLeft;
     }
 }

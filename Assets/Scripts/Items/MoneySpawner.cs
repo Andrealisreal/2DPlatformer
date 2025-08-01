@@ -28,7 +28,14 @@ namespace Items
 
             var money = Instantiate(_prefab);
             money.transform.position = _spawnPoints[Random.Range(0, _spawnPoints.Length)].position;
-            money.Collected += Spawn;
+            money.Collected += OnCoinCollected;
+        }
+
+        private void OnCoinCollected(Money money)
+        {
+            Spawn();
+            money.Collected -= OnCoinCollected;
+            Destroy(money.gameObject);
         }
     }
 }

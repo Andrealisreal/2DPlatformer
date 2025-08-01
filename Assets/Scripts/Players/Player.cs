@@ -38,12 +38,12 @@ namespace Players
             _mover.Move(_input.Movement);
         }
 
-        private void OnCollisionStay2D(Collision2D other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.TryGetComponent<Money>(out _))
+            if (other.TryGetComponent<Money>(out var money))
             {
                 _inventory.AddCoin();
-                Destroy(other.gameObject);
+                money.Collect();
             }
         }
 
