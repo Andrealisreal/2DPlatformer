@@ -7,6 +7,7 @@ namespace Players
         [SerializeField] private float _force = 5f;
         [SerializeField] private Vector2 _size;
         [SerializeField] private Vector3 _height;
+        [SerializeField] private LayerMask _layerMask;
 
         private Rigidbody2D _rigidbody2D;
 
@@ -19,8 +20,7 @@ namespace Players
 
         public void Jump()
         {
-            Collider2D hit = Physics2D.OverlapBox(transform.position + _height, _size, 0f,
-                LayerMask.GetMask("Ground", "Enemy"));
+            Collider2D hit = Physics2D.OverlapBox(transform.position + _height, _size, 0f, _layerMask);
 
             if (hit != null)
                 _rigidbody2D.AddForce(Vector2.up * _force, ForceMode2D.Impulse);

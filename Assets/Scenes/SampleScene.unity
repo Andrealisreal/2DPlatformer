@@ -759,6 +759,9 @@ MonoBehaviour:
   _force: 7
   _size: {x: 0.82, y: 1.06}
   _height: {x: 0, y: -0.21, z: 0}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 72
 --- !u!114 &612512880
 MonoBehaviour:
   m_ObjectHideFlags: 0

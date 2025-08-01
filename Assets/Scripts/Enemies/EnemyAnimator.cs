@@ -21,12 +21,4 @@ namespace Enemies
             _animator.SetBool(AnimationParameters.Movement.Run, false);
         }
     }
-
-    public static class AnimationParameters
-    {
-        public static class Movement
-        {
-            public static readonly int Run = Animator.StringToHash("Run");
-        }
-    }
 }
